@@ -95,4 +95,50 @@ void Gomoku::welcome() const
 
 	system("pause");
 }
+bool Gomoku::colWin(char player, int x, int y) {
+	//判斷直向棋子數  
+	int connect = 1;//棋子數(因為初始本身就是一顆棋子,所以為1)
+	for (int i = 1;; i++) {
+		if (map[y+i][x] == player)
+			connect++; //如果Y座標+1(直線向上)是相同的棋子,棋子數+1  
+		else 
+			break;//不是相同棋子結束迴圈
+	}
 
+	for (int i = 1;; i++) {
+		if (map[y -i][x] == player)
+			connect++; //如果Y座標-1(直線向下)是相同的棋子,棋子數+1
+		else
+			break;
+	}
+	
+	//如果棋子數大於等於5,則獲勝 
+	if (connect >= 5)
+		return true;
+	else
+		return false;
+
+}
+bool Gomoku::rowWin(char player, int x, int y) { 
+	//判斷橫向棋子數 
+	int connect = 1; 
+	for (int i = 1;; i++) {
+		if (map[y][x+i] == player) 
+			connect++; //如果X座標+1(橫線向右)是相同的棋子,棋子數+1
+		else
+			break;
+	}
+	
+	for (int i = 1;; i++) {
+		//如果X座標-1(橫線向左)是相同的棋子,棋子數+1 
+		if (map[y][x - i] == player)
+			connect++;
+		else
+			break;
+	}
+	
+	if (connect >= 5)
+		return true;
+	else
+		return false;
+}
