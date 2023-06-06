@@ -1,3 +1,54 @@
+#include "Gomoku.h" 
+#include <iostream> 
+using namespace std;
+
+Gomoku::Gomoku() {
+	//地圖初始化
+	for (int i = 0; i < 15; i++)
+	{
+		for (int j = 0; j < 15; j++)
+		{
+			map[i][j] = ' ';
+		}
+	}
+}
+
+bool Gomoku::winner(char player, int x, int y)
+{
+	//上述四個判斷有一個成立,及獲勝
+	if (colWin(player, x, y) || rowWin(player, x, y) || obliWinl(player, x, y) || obliWin2(player, x, y))
+		return true;
+	else
+		return false;
+}
+
+bool Gomoku::tfSet(char player, int x, int y)
+{
+	//輸入棋子位置
+	if (x >= 0 && x < 15 && y >= 0 && y < 15 && map[y][x] == ' ') {
+		map[x][y] = player;
+		return true;
+	}
+	else
+	{
+		cout << "無效的輸入, 請重新輸入。" << endl;
+		system("pause");
+		system("CLS");
+		return false;
+	}
+}
+
+bool Gomoku::mapOver()
+{
+	//搜尋是否滿盤,只要有一個是空的,地圖就不為滿
+	for (int i = 0; i < 15; i++)
+		for (int j = 0; j < 15; j++)
+			if (map[i][j] == ' ')
+				return false;
+
+	return true;
+}
+
 void Gomoku::show() const
 {
 	//顯示棋盤
