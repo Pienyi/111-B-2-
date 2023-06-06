@@ -142,3 +142,50 @@ bool Gomoku::rowWin(char player, int x, int y) {
 	else
 		return false;
 }
+bool Gomoku::obliWinl(char player, int x, int y)
+{
+	//判斷斜向棋子數
+	int connect = 1;//棋子數(因為初始本身就是一顆棋子,所以為1)
+	for (int i = 1;; i++) {
+		if (map[y + i][x + i] == player)
+			connect++; //如果Y座標+1 和 X座標+1(斜線向右上)是相同的棋子,棋子數+1  
+		else
+			break;//不是相同棋子結束迴圈
+	}
+
+	for (int i = 1;; i++) {
+		if (map[y - i][x - i] == player)
+			connect++; //如果Y座標-1 和 X座標-1(斜線向左下)是相同的棋子,棋子數+1
+		else
+			break;
+	}
+	//如果棋子數大於等於5,則獲勝 
+	if (connect >= 5)
+		return true;
+	else
+		return false;
+}
+
+bool Gomoku::obliWin2(char player, int x, int y)
+{
+	//判斷斜向棋子數
+	int connect = 1;//棋子數(因為初始本身就是一顆棋子,所以為1)
+	for (int i = 1;; i++) {
+		if (map[y + i][x - i] == player)
+			connect++; //如果Y座標+1 和 X座標-1(斜線向左上)是相同的棋子,棋子數+1  
+		else
+			break;//不是相同棋子結束迴圈
+	}
+
+	for (int i = 1;; i++) {
+		if (map[y - i][x + i] == player)
+			connect++; //如果Y座標-1 和 X座標+1(斜線向右下)是相同的棋子,棋子數+1
+		else
+			break;
+	}
+	//如果棋子數大於等於5,則獲勝 else
+	if (connect >= 5)
+		return true;
+	else
+		return false;
+}
